@@ -57,3 +57,8 @@ class Orbit:
         predicted_df.loc[:, 'prediction'] = self.sc_out.inverse_transform(
             predicted_df.loc[:, 'prediction'].values.reshape(-1, 1))
         return np.array(predicted_df.prediction)
+
+    def save(self, filepath):
+        import pickle
+        with open(filepath, 'wb') as f:
+            pickle.dump(self, f)

@@ -24,7 +24,8 @@ def preprocess(dataset, cfg, logger=None):
         df = df.rename({'high': 'High'}, axis=1)
 
     try:
-        df['Mean'] = (df['Low'] + df['High']) / 2
+        df = df.copy()  # avoid SettingWithCopyWarning in pandas 2.x
+        df.loc[:, 'Mean'] = (df['Low'] + df['High']) / 2
     except:
         if logger is not None:
             logger.error('your dataset_loader should have High and Low columns')

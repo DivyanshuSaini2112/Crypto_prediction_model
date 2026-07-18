@@ -7,7 +7,6 @@ from models import MODELS
 from data_loader import get_dataset
 from factory.trainer import Trainer
 from factory.evaluator import Evaluator
-from factory.profit_calculator import ProfitCalculator
 import pandas as pd
 
 from sklearn.model_selection import TimeSeriesSplit
@@ -20,7 +19,7 @@ from data_loader.creator import create_dataset, preprocess
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_path=HYDRA_PATH, config_name="train")
+@hydra.main(config_path=HYDRA_PATH, config_name="train", version_base=None)
 def train(cfg: DictConfig):
     if cfg.load_path is None and cfg.model is None:
         msg = 'either specify a load_path or config a model.'
@@ -71,10 +70,20 @@ def train(cfg: DictConfig):
 
         reporter.add_average()
 
-    ProfitCalculator(cfg, dataset_for_profit, profit_calculator, mean_prediction, reporter).profit_calculator()
+
 
     reporter.print_pretty_metrics(logger)
     reporter.save_metrics()
+
+    try:
+        model_save_path = os.path.join(cfg.save_dir, "model.pkl")
+        if hasattr(model, 'save'):
+            model.save(model_save_path)
+            logger.info(f"Model successfully saved to {model_save_path}")
+        else:
+            logger.warning(f"Model {cfg.model.type} does not implement a save() method.")
+    except Exception as e:
+        logger.warning(f"Could not save model: {e}")
 
 
 if __name__ == '__main__':

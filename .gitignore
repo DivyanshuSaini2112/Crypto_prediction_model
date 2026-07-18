@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Models
+*.pkl
+
+# Data and Outputs
+outputs/
+lightning_logs/
+metrics_history/
+plots/
+
+# Ignore large datasets if needed (keeping data/ folder but ignoring csv might be too aggressive if they want the sample data, but they have a lot of csvs)
+data/*.csv
+
+# Virtual Environments
+venv/
+.env
+.venv/
+env/
+ENV/

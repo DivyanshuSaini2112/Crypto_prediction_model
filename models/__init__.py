@@ -1,21 +1,11 @@
-from .random_forest import RandomForest
-from .sarimax import Sarimax
-from .orbit import Orbit
-from .LSTM import MyLSTM
-from .GRU import MyGRU
-from .arima import MyARIMA
-from .prophet import MyProphet
-from .xgboost import MyXGboost
-from .neural_prophet import Neural_Prophet
+try:
+    from .orbit import Orbit
+except ImportError:
+    class Orbit:  # type: ignore
+        def __init__(self, *a, **kw):
+            raise ImportError("Orbit requires orbit-ml: pip install orbit-ml==1.1.3")
 
 
-MODELS = {'random_forest': RandomForest,
-          'sarimax': Sarimax,
-          'orbit': Orbit,
-          'lstm': MyLSTM,
-          'gru': MyGRU,
-          'arima': MyARIMA,
-          'prophet': MyProphet,
-          'xgboost': MyXGboost,
-          'neural_prophet': Neural_Prophet
-          }
+MODELS = {
+    'orbit': Orbit
+}

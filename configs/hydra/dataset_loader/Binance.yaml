@@ -1,0 +1,30 @@
+# Binance.yaml — Live data fetching via Yahoo Finance (works in India, no API key needed)
+#
+# All crypto exchange APIs (BitMEX, Binance, CoinGecko, Bybit) are blocked/geo-restricted
+# in India. Yahoo Finance (yfinance) works reliably from India with no API key.
+#
+# Usage:
+#   python train.py dataset_loader=Binance model=xgboost
+#   python train.py dataset_loader=Binance dataset_loader.symbol=ETHUSD model=random_forest
+#   python train.py dataset_loader=Binance dataset_loader.binsize=1h model=lstm
+#
+# Available symbols (same names as the CSV files in ./data/):
+#   XBTUSD  -> BTC-USD   | ETHUSD  -> ETH-USD   | BNBUSD  -> BNB-USD
+#   ADAUSD  -> ADA-USD   | DOGEUSD -> DOGE-USD   | SOLUSD  -> SOL-USD
+#   DOTUSD  -> DOT-USD   | LTCUSD  -> LTC-USD    | TRXUSD  -> TRX-USD
+#   AVAXUSD -> AVAX-USD  | LINKUSD -> LINK-USD   | NEARUSD -> NEAR-USD
+#   BCHUSD  -> BCH-USD   | AXSUSD  -> AXS-USD    | EOSUSD  -> EOS-USD
+#   APEUSD  -> APE-USD   | APTUSD  -> APT-USD    | CROUSD  -> CRO-USD
+#
+# Intervals:
+#   1d = daily (unlimited history)   1h = hourly (last 730 days)
+#   5m = 5-minute (last 60 days)     1m = 1-minute (last 7 days)
+
+defaults:
+  - _self_
+  - common
+
+name: 'Binance'
+binsize: 1d          # 1d | 1h | 5m | 1m
+symbol: "XBTUSD"     # auto-mapped to Yahoo Finance ticker (e.g. BTC-USD)
+batch_size: 1000

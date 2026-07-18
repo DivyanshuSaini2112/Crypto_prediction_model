@@ -4,11 +4,10 @@ from sklearn.preprocessing import MaxAbsScaler
 
 
 class Orbit:
-    model = None
-    sc_in = MaxAbsScaler()
-    sc_out = MaxAbsScaler()
-
     def __init__(self, args):
+        self.model = None
+        self.sc_in = MaxAbsScaler()
+        self.sc_out = MaxAbsScaler()
         self.response_col = args.response_col
         self.date_col = args.date_col
         self.estimator = args.estimator

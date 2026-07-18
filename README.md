@@ -23,7 +23,7 @@ We trained the Orbit model on **Bitcoin (BTC)** historical daily data from **201
 
 Below is the graph plotting the model's performance on the validation dataset:
 
-![Validation Plot](plots/plot_0.png)
+![Validation Plot](assets/plot_0.png)
 
 ## Project Structure
 

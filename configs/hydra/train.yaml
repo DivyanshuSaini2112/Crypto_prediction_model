@@ -1,11 +1,11 @@
 defaults:
   - _self_
   - model: orbit
-  - dataset_loader: CoinMarket #Bitmex
+  - dataset_loader: Binance
   - metrics
 
 validation_method: simple #simple - cross_validation
 symbol: BTC
-load_path: data/XBTUSD-1d-data.csv
+load_path: null
 save_dir:
 dataset_path:
